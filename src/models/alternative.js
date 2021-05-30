@@ -1,30 +1,26 @@
 const connParams = require('../infra/connect');
 const Sequelize = require('sequelize')
 
-const User = connParams.define('user', {
+const Alternative = connParams.define('alternative', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true
     },
-    name: {
+    alternative: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    user: {
-        type: Sequelize.STRING,
+    id_answer: {
+        type: Sequelize.INTEGER,
         allowNull: false
     },
-    password: {
-        type: Sequelize.STRING,
+    isValid: {
+        type: Sequelize.BOOLEAN,
         allowNull: false
     },
-    token: {
-        type: Sequelize.STRING,
-        allowNull: true
-    },
-},{
+}, {
     freezeTableName: true,
     timestamps: false
 })
 
-module.exports = User;
+module.exports = Alternative;
