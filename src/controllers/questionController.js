@@ -12,8 +12,8 @@ exports.createQuestion = (req, res) => {
 
     Question.create({
         question: body.question,
-    }).then(user => {
-        return res.json(user);
+    }).then(question => {
+        return res.json(question);
     }).catch(err => {
         console.log(err);
     })
@@ -21,8 +21,8 @@ exports.createQuestion = (req, res) => {
 }
 
 exports.getAllQuestions = (req, res) => {
-    Question.findAll().then(user => {
-        return res.json(user);
+    Question.findAll().then(question => {
+        return res.json(question);
     }).catch(err => {
         console.log(err)
     })
@@ -33,8 +33,8 @@ exports.getQuestionById = (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(user => {
-        return res.json(user);
+    }).then(question => {
+        return res.json(question);
     }).catch(err => {
         console.log(err)
     })
@@ -54,8 +54,8 @@ exports.updateQuestion = (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(user => {
-        return res.json(user);
+    }).then(question => {
+        return res.json(question);
     }).catch(err => {
         console.log(err)
     })
@@ -66,8 +66,8 @@ exports.deleteQuestionById = (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(alternative => {
-        return res.json(alternative);
+    }).then(question => {
+        return res.json(question);
     }).catch(err => {
         console.log(err)
     })

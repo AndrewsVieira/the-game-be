@@ -14,8 +14,8 @@ exports.createAlternative = (req, res) => {
         alternative: body.alternative,
         id_question: body.id_question,
         is_right : body.is_right
-    }).then(user => {
-        return res.json(user);
+    }).then(alternative => {
+        return res.json(alternative);
     }).catch(err => {
         console.log(err);
     })
@@ -23,8 +23,8 @@ exports.createAlternative = (req, res) => {
 }
 
 exports.getAllAlternatives = (req, res) => {
-    Alternative.findAll().then(user => {
-        return res.json(user);
+    Alternative.findAll().then(alternative => {
+        return res.json(alternative);
     }).catch(err => {
         console.log(err)
     })
@@ -35,8 +35,8 @@ exports.getAlternativeById = (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(user => {
-        return res.json(user);
+    }).then(alternative => {
+        return res.json(alternative);
     }).catch(err => {
         console.log(err)
     })
@@ -57,8 +57,8 @@ exports.updateAlternative = (req, res) => {
         where: {
             id: req.params.id
         }
-    }).then(user => {
-        return res.json(user);
+    }).then(alternative => {
+        return res.json(alternative);
     }).catch(err => {
         console.log(err)
     })
