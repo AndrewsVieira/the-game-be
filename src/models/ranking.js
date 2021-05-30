@@ -1,5 +1,6 @@
 const connParams = require('../infra/connect');
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
+const User = require('./user');
 
 const Ranking = connParams.define('ranking', {
     id: {
@@ -14,9 +15,13 @@ const Ranking = connParams.define('ranking', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-},{
+}, {
     freezeTableName: true,
     timestamps: false
 })
+
+Ranking.hasOne(User, {
+    foreignKey: 'id_user'
+});
 
 module.exports = Ranking;

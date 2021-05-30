@@ -1,5 +1,6 @@
 const connParams = require('../infra/connect');
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
+const Answer = require('./answer');
 
 const Alternative = connParams.define('alternative', {
     id: {
@@ -14,7 +15,7 @@ const Alternative = connParams.define('alternative', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    isValid: {
+    isRight: {
         type: Sequelize.BOOLEAN,
         allowNull: false
     },
@@ -22,5 +23,9 @@ const Alternative = connParams.define('alternative', {
     freezeTableName: true,
     timestamps: false
 })
+
+Alternative.hasOne(Answer, {
+    foreignKey: 'id_answer'
+});
 
 module.exports = Alternative;
