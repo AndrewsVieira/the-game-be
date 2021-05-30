@@ -22,11 +22,11 @@ const Answer = connParams.define('answer', {
 })
 
 Answer.hasMany(Alternative, {
-    foreignKey: 'id_alternative'
+    foreignKey: 'id'
 });
 
 Answer.hasOne(User, {
-    foreignKey: 'id_user'
+    foreignKey: 'id'
 });
 
 module.exports = Answer;

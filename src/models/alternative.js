@@ -25,7 +25,7 @@ const Alternative = connParams.define('alternative', {
 })
 
 Alternative.hasOne(Question, {
-    foreignKey: 'id_question'
+    foreignKey: 'id'
 });
 
 module.exports = Alternative;
