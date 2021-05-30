@@ -18,6 +18,10 @@ const User = connParams.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    token: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
 },{
     freezeTableName: true,
     timestamps: false
