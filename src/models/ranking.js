@@ -21,7 +21,7 @@ const Ranking = connParams.define('ranking', {
 })
 
 Ranking.hasOne(User, {
-    foreignKey: 'id_user'
+    foreignKey: 'id'
 });
 
 module.exports = Ranking;

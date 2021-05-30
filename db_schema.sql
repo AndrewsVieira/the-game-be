@@ -11,8 +11,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) NOT NULL,
-  `user` varchar(20) DEFAULT NULL,
-  `password` varchar(200) DEFAULT NULL,
+  `user` varchar(20) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `token` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
