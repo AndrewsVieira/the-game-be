@@ -1,7 +1,20 @@
 const User = require("../models/user");
+const bcrypt = require('bcrypt')
 const Message = require("../utils/message");
 
-
+function hashPassword(password) {
+    console.log('senha:', password);
+    bcrypt.genSalt(password, function(err, salt) {
+        console.log('Erro antes do hash\n', err)
+        bcrypt.hash(password, salt, function(err, hash) {
+            if (err) {
+                console.log('Erro ao fazer o hash do password.\n', err);
+            } else {
+                return hash
+            }
+        });
+    });
+}
 
 exports.create = (req, res) => {
     let body = req.body;
@@ -13,7 +26,7 @@ exports.create = (req, res) => {
     User.create({
         name: body.name,
         user: body.user,
-        password: body.password
+        password: hashPassword(body.password)
     }).then(user => {
         return res.json(user);
     }).catch(err => {
@@ -54,7 +67,7 @@ exports.update = (req, res) => {
     User.update({
         name: body.name,
         user: body.user,
-        password: body.password
+        password: hashPassword(body.password)
     }, {
         where: {
             id: req.params.id
