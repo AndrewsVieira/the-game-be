@@ -1,20 +1,6 @@
 const User = require("../models/user");
-const bcrypt = require('bcrypt')
 const Message = require("../utils/message");
-
-function hashPassword(password) {
-    console.log('senha:', password);
-    bcrypt.genSalt(password, function(err, salt) {
-        console.log('Erro antes do hash\n', err)
-        bcrypt.hash(password, salt, function(err, hash) {
-            if (err) {
-                console.log('Erro ao fazer o hash do password.\n', err);
-            } else {
-                return hash
-            }
-        });
-    });
-}
+const bcrypt = require("bcrypt");
 
 exports.create = (req, res) => {
     let body = req.body;
@@ -23,16 +9,23 @@ exports.create = (req, res) => {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
 
-    User.create({
-        name: body.name,
-        user: body.user,
-        password: hashPassword(body.password)
-    }).then(user => {
-        return res.json(user);
-    }).catch(err => {
-        console.log(err);
-    })
-
+    const salt = 10;
+    bcrypt.hash(body.password, salt, (err, hash) => {
+        if (err) {
+            console.log('Error: erro ao cifrar a senha.', err);
+        } else {
+            console.log('hash', hash);
+            User.create({
+                name: body.name,
+                user: body.user,
+                password: hash
+            }).then(user => {
+                return res.json(user);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    });
 }
 
 exports.getAll = (req, res) => {
@@ -41,7 +34,6 @@ exports.getAll = (req, res) => {
     }).catch(err => {
         console.log(err)
     })
-
 }
 
 exports.getById = (req, res) => {
