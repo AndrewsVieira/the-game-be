@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Message = require("../utils/message");
 
-require ('dotenv').config();
+require('dotenv').config();
 
 exports.login = (req, res) => {
     let body = req.body;
@@ -14,8 +14,7 @@ exports.login = (req, res) => {
 
     User.findOne({
         where: {
-            user: body.login,
-            password: body.password
+            user: body.login
         }
     }).then(user => {
         if (user == null) {
@@ -43,7 +42,7 @@ exports.login = (req, res) => {
 
                 return res.json({
                     token: token
-                });              
+                });
             }
         })
     }).catch(err => {
