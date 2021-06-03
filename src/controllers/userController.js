@@ -1,7 +1,8 @@
 const User = require("../models/user");
 const Message = require("../utils/message");
 const bcrypt = require("bcrypt");
-const { Sequelize, Op } = require("sequelize");
+
+const salt = 10;
 
 exports.create = (req, res) => {
     let body = req.body;
@@ -22,7 +23,6 @@ exports.create = (req, res) => {
         }
 
         // fazendo o hash da senha
-        const salt = 10;
         bcrypt.hash(body.password, salt, (err, hash) => {
             if (err) {
                 console.log('Error: erro ao cifrar a senha.', err);
@@ -72,19 +72,29 @@ exports.update = (req, res) => {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
 
-    User.update({
-        name: body.name,
-        user: body.user,
-        password: hashPassword(body.password)
-    }, {
-        where: {
-            id: req.params.id
+    // fazendo o hash da senha
+    bcrypt.hash(body.password, salt, (err, hash) => {
+        if (err) {
+            console.log('Error: erro ao cifrar a senha.', err);
+        } else {
+            console.log('hash', hash);
+
+            // alterando o usuário
+            User.update({
+                name: body.name,
+                user: body.user,
+                password: hash
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            }).then(user => {
+                return res.json(user);
+            }).catch(err => {
+                console.log(err)
+            })
         }
-    }).then(user => {
-        return res.json(user);
-    }).catch(err => {
-        console.log(err)
-    })
+    });
 }
 
 exports.deleteById = (req, res) => {
@@ -97,5 +107,4 @@ exports.deleteById = (req, res) => {
     }).catch(err => {
         console.log(err)
     })
-
 }
