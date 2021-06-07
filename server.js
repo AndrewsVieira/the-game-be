@@ -16,35 +16,35 @@ app.use(express.json());
 
 // Login e Logout
 app.post('/v1/login', login);
-app.delete("/v1/logout", logout);
+app.delete("/v1/logout", auth, logout);
 
 // Crud usuario
 app.post('/v1/users', create);
-app.get('/v1/users', getAll);
-app.get('/v1/users/:id', getById);
-app.put('/v1/users/:id', update);
-app.delete('/v1/users/:id', deleteById);
+app.get('/v1/users', auth, getAll);
+app.get('/v1/users/:id',  auth, getById);
+app.put('/v1/users/:id', auth, update);
+app.delete('/v1/users/:id', auth, deleteById);
 
 // Crud Alternativas
-app.post('/v1/alternatives', createAlternative);
-app.get('/v1/alternatives', getAllAlternatives);
-app.get('/v1/alternatives/:id', getAlternativeById);
-app.put('/v1/alternatives/:id', updateAlternative);
-app.delete('/v1/alternatives/:id', deleteAlternativeById);
+app.post('/v1/alternatives', auth, createAlternative);
+app.get('/v1/alternatives', auth, getAllAlternatives);
+app.get('/v1/alternatives/:id', auth, getAlternativeById);
+app.put('/v1/alternatives/:id', auth, updateAlternative);
+app.delete('/v1/alternatives/:id', auth, deleteAlternativeById);
 
 // CRUD question
-app.post('/v1/questions', createQuestion);
-app.get('/v1/questions', getAllQuestions);
-app.get('/v1/questions/:id', getQuestionById);
-app.put('/v1/questions/:id', updateQuestion);
-app.delete('/v1/questions/:id', deleteQuestionById);
+app.post('/v1/questions', auth, createQuestion);
+app.get('/v1/questions', auth, getAllQuestions);
+app.get('/v1/questions/:id', auth, getQuestionById);
+app.put('/v1/questions/:id', auth, updateQuestion);
+app.delete('/v1/questions/:id', auth, deleteQuestionById);
 
 // Crud Respostas
-app.post('/v1/answers', createAnswer);
-app.get('/v1/answers', getAllAnswers);
-app.get('/v1/answers/:id', getAnswerById);
-app.put('/v1/answers/:id', updateAnswer);
-app.delete('/v1/answers/:id', deleteAnswerById);
+app.post('/v1/answers', auth, createAnswer);
+app.get('/v1/answers', auth, getAllAnswers);
+app.get('/v1/answers/:id', auth, getAnswerById);
+app.put('/v1/answers/:id', auth, updateAnswer);
+app.delete('/v1/answers/:id', auth, deleteAnswerById);
 
 app.listen(port, hostname, () => {
     console.log(`O servidor está rodando na porta: ${port}`);

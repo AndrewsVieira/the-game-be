@@ -1,5 +1,8 @@
 const User = require("../models/user");
 const Message = require("../utils/message");
+const bcrypt = require("bcrypt");
+
+const salt = 10;
 
 exports.create = (req, res) => {
     let body = req.body;
@@ -8,16 +11,37 @@ exports.create = (req, res) => {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
 
-    User.create({
-        name: body.name,
-        user: body.user,
-        password: body.password
+    // validação para permitir criar apenas um user
+    User.findAndCountAll({
+        where: {
+            user: body.user
+        }
     }).then(user => {
-        return res.json(user);
-    }).catch(err => {
-        console.log(err);
-    })
+        console.log('count', user.count);
+        if (user.count > 0) {
+            return res.status(400).json(Message("Usuário já existe."));
+        }
 
+        // fazendo o hash da senha
+        bcrypt.hash(body.password, salt, (err, hash) => {
+            if (err) {
+                console.log('Error: erro ao cifrar a senha.', err);
+            } else {
+                console.log('hash', hash);
+
+                // criando o usuário
+                User.create({
+                    name: body.name,
+                    user: body.user,
+                    password: hash
+                }).then(user => {
+                    return res.json(user);
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
+        });
+    });
 }
 
 exports.getAll = (req, res) => {
@@ -26,7 +50,6 @@ exports.getAll = (req, res) => {
     }).catch(err => {
         console.log(err)
     })
-
 }
 
 exports.getById = (req, res) => {
@@ -49,19 +72,29 @@ exports.update = (req, res) => {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
 
-    User.update({
-        name: body.name,
-        user: body.user,
-        password: body.password
-    }, {
-        where: {
-            id: req.params.id
+    // fazendo o hash da senha
+    bcrypt.hash(body.password, salt, (err, hash) => {
+        if (err) {
+            console.log('Error: erro ao cifrar a senha.', err);
+        } else {
+            console.log('hash', hash);
+
+            // alterando o usuário
+            User.update({
+                name: body.name,
+                user: body.user,
+                password: hash
+            }, {
+                where: {
+                    id: req.params.id
+                }
+            }).then(user => {
+                return res.json(user);
+            }).catch(err => {
+                console.log(err)
+            })
         }
-    }).then(user => {
-        return res.json(user);
-    }).catch(err => {
-        console.log(err)
-    })
+    });
 }
 
 exports.deleteById = (req, res) => {
@@ -74,5 +107,4 @@ exports.deleteById = (req, res) => {
     }).catch(err => {
         console.log(err)
     })
-
 }

@@ -13,13 +13,13 @@ const auth = (req, res, next) => {
 
     token = token.split(' ').pop();
 
-    jwt.verify(token, process.env.SECRET, (error, decode) => {
+    jwt.verify(token, process.env.SECRET, (error, decoded) => {
         if (error) {
             return res.status(403).json({
                 error: 'Sem Acesso, por favor converse com um administrador!'
             });
         }
-        console.log(decode);
+        console.log(decoded);
         next();
     });
 }
