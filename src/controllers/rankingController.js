@@ -4,16 +4,17 @@ const Message = require("../utils/message");
 
 exports.getAllRankings = (req, res) => {
     Ranking.findAll({
-        include : User
+        include: User
     }).then(ranking => {
 
-        if(ranking.user != null) {
-            ranking.user.password = null;
-            ranking.user.token = null; 
+        let body = {
+            points : ranking.points,
+            user : {
+                name : ranking.user.name
+            }
         }
 
-
-        return res.json(ranking);
+        return res.json(body);
     }).catch(err => {
         console.log(err)
     })
