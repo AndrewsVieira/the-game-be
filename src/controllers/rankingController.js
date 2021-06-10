@@ -6,6 +6,13 @@ exports.getAllRankings = (req, res) => {
     Ranking.findAll({
         include : User
     }).then(ranking => {
+
+        if(ranking.user != null) {
+            ranking.user.password = null;
+            ranking.user.token = null; 
+        }
+
+
         return res.json(ranking);
     }).catch(err => {
         console.log(err)
