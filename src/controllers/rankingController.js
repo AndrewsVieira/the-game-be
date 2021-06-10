@@ -4,7 +4,10 @@ const Message = require("../utils/message");
 
 exports.getAllRankings = (req, res) => {
     Ranking.findAll({
-        include: User.name
+        include: User,
+        attributes: {
+            exclude: ['token', 'password']
+        }
     }).then(ranking => {
         return res.json(ranking);
     }).catch(err => {
