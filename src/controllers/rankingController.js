@@ -4,17 +4,9 @@ const Message = require("../utils/message");
 
 exports.getAllRankings = (req, res) => {
     Ranking.findAll({
-        include: User
+        include: User.name
     }).then(ranking => {
-
-        let body = {
-            points : ranking.points,
-            user : {
-                name : ranking.user.name
-            }
-        }
-
-        return res.json(body);
+        return res.json(ranking);
     }).catch(err => {
         console.log(err)
     })
