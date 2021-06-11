@@ -11,17 +11,13 @@ const Ranking = connParams.define('ranking', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    id_user: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
 }, {
     freezeTableName: true,
     timestamps: false
 })
 
 Ranking.hasOne(User, {
-    foreignKey: 'id_user'
+    foreignKey: 'id'
 });
 
 module.exports = Ranking;
