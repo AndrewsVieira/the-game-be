@@ -35,10 +35,11 @@ exports.create = (req, res) => {
                     user: body.user,
                     password: hash
                 }).then(user => {
-                    return res.json(user);
+                    return res.json(Message("Cadastro realizado com sucesso."));
                 }).catch(err => {
-                    console.log(err);
-                })
+                    console.log("[Erro no insert]\n",err);
+                    return res.status(500).json(Message("Erro no servidor. Por favor, entre em contato com o suporte."));
+                });
             }
         });
     });
@@ -46,7 +47,11 @@ exports.create = (req, res) => {
 
 exports.getAll = (req, res) => {
     User.findAll().then(user => {
-        return res.json(user);
+        return res.json({
+            id: user.id,
+            name: user.name,
+            user: user.user
+        });
     }).catch(err => {
         console.log(err)
     })
@@ -58,9 +63,13 @@ exports.getById = (req, res) => {
             id: req.params.id
         }
     }).then(user => {
-        return res.json(user);
+        return res.json({
+            id: user.id,
+            name: user.name,
+            user: user.user
+        });
     }).catch(err => {
-        console.log(err)
+        console.log(err);
     })
 }
 
@@ -89,10 +98,11 @@ exports.update = (req, res) => {
                     id: req.params.id
                 }
             }).then(user => {
-                return res.json(user);
+                return res.json(Message("Cadastro alterado com sucesso."));
             }).catch(err => {
-                console.log(err)
-            })
+                console.log("[Erro no update]\n", err);
+                return res.status(500).json(Message("Erro no servidor. Por favor, entre em contato com o suporte."));
+            });
         }
     });
 }
@@ -103,8 +113,9 @@ exports.deleteById = (req, res) => {
             id: req.params.id
         }
     }).then(user => {
-        return res.json(user);
+        return res.json(Message("Usuário deletado com sucesso."));
     }).catch(err => {
-        console.log(err)
+        console.log("[Erro no delete]\n", err);
+        return res.status(500).json(Message("Erro no servidor. Por favor, entre em contato com o suporte."));
     })
 }
