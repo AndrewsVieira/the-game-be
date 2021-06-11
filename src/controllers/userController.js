@@ -62,7 +62,7 @@ exports.getById = (req, res) => {
             id: req.params.id
         }
     }).then(user => {
-        return res.json({user});
+        return res.json(user);
     }).catch(err => {
         console.log(err);
     })
