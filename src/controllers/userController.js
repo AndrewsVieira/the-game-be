@@ -46,12 +46,10 @@ exports.create = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    User.findAll().then(user => {
-        return res.json({
-            id: user.id,
-            name: user.name,
-            user: user.user
-        });
+    User.findAll({
+        attributes: ['id', 'name']
+    }).then(user => {
+        return res.json(user);
     }).catch(err => {
         console.log(err)
     })
@@ -59,15 +57,12 @@ exports.getAll = (req, res) => {
 
 exports.getById = (req, res) => {
     User.findOne({
+        attributes: ['id', 'name'],
         where: {
             id: req.params.id
         }
     }).then(user => {
-        return res.json({
-            id: user.id,
-            name: user.name,
-            user: user.user
-        });
+        return res.json(user);
     }).catch(err => {
         console.log(err);
     })
