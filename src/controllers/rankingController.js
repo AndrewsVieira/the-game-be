@@ -17,26 +17,4 @@ exports.getAllRankings = (req, res) => {
     })
 }
 
-exports.getRankingById = (req, res) => {
-    Ranking.findOne({
-        where: {
-            id: req.params.id
-        }
-    }).then(ranking => {
-        return res.json(ranking);
-    }).catch(err => {
-        console.log(err)
-    })
-}
 
-exports.deleteRankingById = (req, res) => {
-    Ranking.destroy({
-        where: {
-            id: req.params.id
-        }
-    }).then(ranking => {
-        return res.json(ranking);
-    }).catch(err => {
-        console.log(err)
-    })
-}
