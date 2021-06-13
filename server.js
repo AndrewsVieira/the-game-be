@@ -10,6 +10,7 @@ const { create, getAll, getById, update, deleteById } = require('./src/controlle
 const { createAlternative, getAllAlternatives, getAlternativeById, updateAlternative, deleteAlternativeById } = require('./src/controllers/alternativeController')
 const { createQuestion, getAllQuestions, getQuestionById, updateQuestion, deleteQuestionById } = require('./src/controllers/questionController')
 const { createAnswer, getAllAnswers, getAnswerById, updateAnswer, deleteAnswerById } = require('./src/controllers/answerController')
+const { createRanking, getAllRankings, getRankingById, updateRanking, deleteRankingById } = require('./src/controllers/rankingController')
 
 app.use(cors());
 app.use(express.json());
@@ -45,6 +46,10 @@ app.get('/v1/answers', auth, getAllAnswers);
 app.get('/v1/answers/:id', auth, getAnswerById);
 app.put('/v1/answers/:id', auth, updateAnswer);
 app.delete('/v1/answers/:id', auth, deleteAnswerById);
+
+// Crud Ranking
+app.get('/v1/rankings', getAllRankings);
+app.get('/v1/rankings/:id', getRankingById);
 
 app.listen(port, hostname, () => {
     console.log(`O servidor está rodando na porta: ${port}`);

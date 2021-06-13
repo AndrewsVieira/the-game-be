@@ -16,8 +16,8 @@ const Ranking = connParams.define('ranking', {
     timestamps: false
 })
 
-Ranking.hasOne(User, {
-    foreignKey: 'id'
+Ranking.belongsTo(User, {
+    foreignKey: 'id_user'
 });
 
 module.exports = Ranking;
