@@ -1,5 +1,9 @@
 const User = require("../models/user");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Message = require("../utils/message");
+
+require('dotenv').config();
 
 exports.login = (req, res) => {
     let body = req.body;
@@ -10,16 +14,39 @@ exports.login = (req, res) => {
 
     User.findOne({
         where: {
-            user: body.login,
-            password: body.password
+            user: body.login
         }
     }).then(user => {
         if (user == null) {
-            return res.status(400).json(Message("Usuario não encontrado"));
+            console.log("Usuário não encontrado.");
+            return res.status(400).json(Message("Usuário ou senha incorretos."));
         }
-        return res.json(user);
+
+        bcrypt.compare(body.password, user.password).then(result => {
+            if (result) {
+                const token = jwt.sign({
+                    name: user.login
+                }, process.env.SECRET);
+
+                User.update({
+                    token: token
+                }, {
+                    where: {
+                        id: user.id
+                    }
+                }).then(() => {
+                    console.log('Token alterado na tabela User.');
+                }).catch(err => {
+                    console.log(err);
+                });
+
+                return res.json({
+                    token: token
+                });
+            }
+        })
     }).catch(err => {
-        console.log('Error ao logar', err)
+        console.log('Error ao logar', err);
     });
 }
 
