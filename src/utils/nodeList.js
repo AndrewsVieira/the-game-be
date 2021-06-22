@@ -1,20 +1,22 @@
 const Node = require("./node");
 
 class List {
-    constructor(data) {
+    constructor(list) {
         this.size = 0;
-        
-        if (Array.isArray(data)) {
+
+        if (Array.isArray(list)) {
             this.begin = null;
-            data.forEach(element => {
+            list.forEach(element => {
                 this.add(element);
             });
+        } else if (list === null) {
+            this.begin = null;
         } else {
             let element;
-            while (data.next != null) {
-                element = data.data;
+            while (list.next != null) {
+                element = list.data;
                 console.log(element);
-                data = data.next;
+                list = list.next;
             }
         }
     }
@@ -41,22 +43,21 @@ class List {
     }
 
     sort(option) {
-        if (option === 1) this.mergeSort(this.begin, option);
+        if (option === 1) this.mergeSort(this, option);
     }
 
     mergeSort(list, option) {
-
-        // console.log("================\n list\n===============\n", list);
-
         if (list !== undefined) {
+            if (list.begin.next === undefined || list.begin.next === null) return list;
+            console.log("================\n LISTA \n===============\n", list);
+            console.log("================\n BEGIN \n===============\n", list.begin);
+            console.log("================\n NEXT \n===============\n", list.begin.next);
 
-            if (list.next === null) return list;
-
-            let leftPart = list;
-            let leftPointer = list;
+            let leftPart = list.begin;
+            let leftPointer = list.begin;
             let rightPart = null;
 
-            let middle = Math.floor(this.size / 2)
+            let middle = Math.floor(this.size / 2);
             let count2 = 0;
 
             // separar em duas lista, a da esquerda e a da direita
@@ -67,16 +68,17 @@ class List {
 
             rightPart = new List(leftPointer.next);
             leftPointer.next = null;
+
             if (option === 1) return this.mergeByPoints(this.mergeSort(leftPart, option), this.mergeSort(rightPart.head, option));
         }
     }
 
     mergeByPoints(left, right) {
-        // console.log("================\nL\n===============\n", left);
-        // console.log("================\nR\n===============\n", right);
+        console.log("================\nL\n===============\n", left);
+        console.log("================\nR\n===============\n", right);
 
         if (left !== undefined && right !== undefined) {
-            let result = new List(),
+            let result = new List(null),
                 pivot = result.begin,
                 leftPoints = left.data.points,
                 rightPoints = right.data.points;
