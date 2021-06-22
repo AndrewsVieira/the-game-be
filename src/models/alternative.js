@@ -24,7 +24,7 @@ const Alternative = connParams.define('alternative', {
     timestamps: false
 })
 
-Alternative.hasOne(Question, {
+Alternative.belongsTo(Question, {
     foreignKey: 'id_question'
 });
 
