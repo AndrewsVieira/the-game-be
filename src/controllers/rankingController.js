@@ -1,11 +1,9 @@
 const Ranking = require("../models/ranking");
 const User = require("../models/user");
-const Message = require("../utils/message");
-const List = require("../utils/nodeList");
+const List = require("../utils/list");
+const message = require("../utils/message");
 
-exports.getAllRankings = (req, res) => {
-    const ORDER_BY_POINTS = 1;
-
+exports.getAllRankings = (req, res) => {  
     Ranking.findAll({
         include: [
             {
@@ -14,9 +12,19 @@ exports.getAllRankings = (req, res) => {
             }
         ]        
     }).then(ranking => {
-        let list = new List(ranking);
+        let list = new List();
+
+        ranking.forEach(element => {
+            list.inserting(element);
+        });
         
-        list.sort(ORDER_BY_POINTS);
+        let option = parseInt(req.params.option)
+
+        if (option === 1 || option === 2) {
+            list.sort(option);
+        } else {
+            return res.json(message("Opção inválida"));
+        }
 
         return res.json(list);
     }).catch(err => {

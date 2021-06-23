@@ -35,7 +35,7 @@ app.delete('/v1/alternatives/:id', auth, deleteAlternativeById);
 
 // CRUD question
 app.post('/v1/questions', auth, createQuestion);
-app.get('/v1/questions', auth, getAllQuestions);
+app.get('/v1/questions/', auth, getAllQuestions);
 app.get('/v1/questions/:id', auth, getQuestionById);
 app.put('/v1/questions/:id', auth, updateQuestion);
 app.delete('/v1/questions/:id', auth, deleteQuestionById);
@@ -48,7 +48,7 @@ app.put('/v1/answers/:id', auth, updateAnswer);
 app.delete('/v1/answers/:id', auth, deleteAnswerById);
 
 // Crud Ranking
-app.get('/v1/rankings', auth, getAllRankings);
+app.get('/v1/rankings/:option', auth, getAllRankings);
 
 app.listen(port, hostname, () => {
     console.log(`O servidor está rodando na porta: ${port}`);
