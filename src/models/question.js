@@ -1,5 +1,6 @@
 const connParams = require('../infra/connect');
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
+const Alternative = require('./alternative');
 
 const Question = connParams.define('question', {
     id: {
@@ -14,5 +15,9 @@ const Question = connParams.define('question', {
     freezeTableName: true,
     timestamps: false
 })
+
+Question.hasMany(Alternative, {
+    foreignKey: 'id_question'
+});
 
 module.exports = Question;

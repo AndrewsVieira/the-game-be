@@ -1,6 +1,5 @@
 const connParams = require('../infra/connect');
 const Sequelize = require('sequelize');
-const Question = require('./question');
 
 const Alternative = connParams.define('alternative', {
     id: {
@@ -22,10 +21,6 @@ const Alternative = connParams.define('alternative', {
 }, {
     freezeTableName: true,
     timestamps: false
-})
-
-Alternative.belongsTo(Question, {
-    foreignKey: 'id_question'
 });
 
 module.exports = Alternative;
