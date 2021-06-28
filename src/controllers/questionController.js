@@ -36,7 +36,13 @@ exports.getQuestionById = (req, res) => {
     Question.findOne({
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: Alternative,
+                attributes: ['id', 'alternative']
+            }
+        ]    
     }).then(question => {
         return res.json(question);
     }).catch(err => {
