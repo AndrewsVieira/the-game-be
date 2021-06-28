@@ -1,5 +1,6 @@
 const Question = require("../models/question");
 const Message = require("../utils/message");
+const Alternative = require("../models/alternative")
 
 exports.createQuestion = (req, res) => {
     let body = req.body;
@@ -21,7 +22,10 @@ exports.createQuestion = (req, res) => {
 }
 
 exports.getAllQuestions = (req, res) => {
-    Question.findAll().then(question => {
+    Question.findAll({
+        attributes: ['id'],
+        limit: 10
+    }).then(question => {
         return res.json(question);
     }).catch(err => {
         console.log(err)
