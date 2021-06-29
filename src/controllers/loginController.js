@@ -26,18 +26,6 @@ exports.login = (req, res) => {
                     name: user.login
                 }, process.env.SECRET);
 
-                User.update({
-                    token: token
-                }, {
-                    where: {
-                        id: user.id
-                    }
-                }).then(() => {
-                    console.log('Token alterado na tabela User.');
-                }).catch(err => {
-                    console.log(err);
-                });
-
                 return res.json({
                     token: token
                 });
