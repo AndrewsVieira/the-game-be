@@ -13,7 +13,6 @@ CREATE TABLE `user` (
   `name` varchar(60) NOT NULL,
   `user` varchar(20) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `token` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
