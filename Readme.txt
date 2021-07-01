@@ -1,3 +1,15 @@
+Projeto Integrador
+
+The Game. Educação em um click
+
+
+Integrantes:
+
+Andrews Vieira
+Alisson Vieira
+Jair Schwan
+Victor Georges.
+----------------------------------------------------------------------
 INSTRUÇÕES PARA UTILIZAR O PROJETO:
 
 Para que seja possível utilizar do projeto, é necessário clonar o arquivo do repositório.
@@ -33,11 +45,8 @@ Considerando esse fato, execute o comando:
 sudo mysql < db_schema.sql
 
 ----------------------------------------------------------------------
-INSTRUÇÕES PARA SUBIR SERVIDOR
+INSTRUÇÕES PARA EXECUTAR O SERVIDOR
 
 
 No diretório the-game-be, encontrar o arquivo "server.js" e executar o comando: node server.js
 ----------------------------------------------------------------------
-INSTRUÇÕES PARA EXEUTAR O FRONT END 
-
-No arquivo the-game-de, encontrar o arquivo (XX) e executar o comado : yarn start
