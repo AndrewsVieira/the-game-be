@@ -10,13 +10,13 @@ Alisson Vieira
 Jair Schwan
 Victor Georges.
 ----------------------------------------------------------------------
-INSTRUÇÕES PARA UTILIZAR O PROJETO:
+O jogo The Game foi dividido em programa cliente e programa servidor.
+Esse projeto é o the-game-be, sendo ele o programa servidor.
 
-Para que seja possível utilizar do projeto, é necessário clonar o arquivo do repositório.
+Assim sendo, clone esse projeto no repositório do git: gitclone https://github.com/Schwaaan/the-game-be.git
 
-git clone https://github.com/Schwaaan/the-game-be.git
 ----------------------------------------------------------------------
-REQUISIÇÕES PARA QUE SEJA POSSÍVEL EXECUTAR O PROJETO 
+PARA QUE SEJA POSSÍVEL EXECUTAR O PROJETO 
 
 É necessário que haja o a instalação do Node.Js, Cors, Dotenv, mysql2, JsonWebToken, Sequelize , Express,  Express-validator, React.Js
 Para isso, utilize dos seguintes comandos:
