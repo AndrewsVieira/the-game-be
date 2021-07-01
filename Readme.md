@@ -1,10 +1,22 @@
-INSTRUÇÕES PARA UTILIZAR O PROJETO:
+Projeto Integrador
 
-Para que seja possível utilizar do projeto, é necessário clonar o arquivo do repositório.
+The Game. Educação em um click
 
-git clone https://github.com/Schwaaan/the-game-be.git
+
+Integrantes:
+
+Andrews Vieira
+Alisson Vieira
+Jair Schwan
+Victor Georges.
 ----------------------------------------------------------------------
-REQUISIÇÕES PARA QUE SEJA POSSÍVEL EXECUTAR O PROJETO 
+O jogo The Game foi dividido em programa cliente e programa servidor.
+Esse projeto é o the-game-be, sendo ele o programa servidor.
+
+Assim sendo, clone esse projeto no repositório do git: gitclone https://github.com/Schwaaan/the-game-be.git
+
+----------------------------------------------------------------------
+PARA QUE SEJA POSSÍVEL EXECUTAR O PROJETO 
 
 É necessário que haja o a instalação do Node.Js, Cors, Dotenv, mysql2, JsonWebToken, Sequelize , Express,  Express-validator, React.Js
 Para isso, utilize dos seguintes comandos:
@@ -33,11 +45,8 @@ Considerando esse fato, execute o comando:
 sudo mysql < db_schema.sql
 
 ----------------------------------------------------------------------
-INSTRUÇÕES PARA SUBIR SERVIDOR
+INSTRUÇÕES PARA EXECUTAR O SERVIDOR
 
 
 No diretório the-game-be, encontrar o arquivo "server.js" e executar o comando: node server.js
 ----------------------------------------------------------------------
-INSTRUÇÕES PARA EXEUTAR O FRONT END 
-
-No arquivo the-game-de, encontrar o arquivo (XX) e executar o comado : yarn start

@@ -6,8 +6,6 @@ const Ranking = require("../models/ranking");
 exports.createAnswer = (req, res) => {
     let body = req.body;
 
-    console.log(body);
-
     if (body.id_user == null || body.id_alternative == null) {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
@@ -16,18 +14,14 @@ exports.createAnswer = (req, res) => {
         id_alternative: body.id_alternative,
         id_user: body.id_user,
     }).then(answer => {
-
         Alternative.findOne({
             where : {
                 id : answer.dataValues.id_alternative
-            },
-            raw : true
+            }
         }).then(alternative => {
             if(alternative == null){
                 return res.status(400).json(Message("Alternativa não encontrada!!"));
             }
-
-            console.log(alternative);
 
             if(alternative.is_right){
 
@@ -38,14 +32,14 @@ exports.createAnswer = (req, res) => {
                         id_user :  body.id_user
                     }
                 }).then(ranking => {
+                    console.log(ranking);
                     if(ranking == null){
                         Ranking.create({
                             id_user :  body.id_user,
                             points : 1
                         });
-            
                         return;
-                    }
+                    };
             
                     let point  = ranking.points + 1;
             
@@ -55,23 +49,29 @@ exports.createAnswer = (req, res) => {
                         where: {
                             id_user: ranking.id_user
                         }
-                    }).then(x => {
-                       console.log("jair lindo", x)
+                    }).then(result => {
+                       console.log(result);
                     }).catch(err => {
                         console.log(err)
-                    })
+                    });
             
+                }).catch( err => {
+                    res.status(500).json(Message("Ocorreu um erro fazer a busca no banco de dados. Tende novamente mais tarde."));
+                    console.log(err);
                 })
             }
-        })
+        }).catch(err => {
+            res.status(500).json(Message("Ocorreu um erro fazer a busca no banco de dados. Tende novamente mais tarde."));
+            console.log(err);
+        });
 
         return res.json(answer);
     }).catch(err => {
+        res.status(500).json(Message("Ocorreu um erro fazer a busca no banco de dados. Tende novamente mais tarde."));
         console.log(err);
     })
 
 }
-
 
 exports.getAllAnswers = (req, res) => {
     Answer.findAll().then(answer => {

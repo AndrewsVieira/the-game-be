@@ -6,11 +6,9 @@ const Message = require("../utils/message");
 require('dotenv').config();
 
 exports.login = (req, res) => {
-    let body = req.body;
+    const body = req.body;
 
-    if (body.login == null || body.password == null) {
-        return res.status(400).json(Message("Os Dados não podem ser nulos!"));
-    }
+    if (body.login == null || body.password == null || body.login == "" || body.password == "") return res.status(422).json(Message("Login e senha são campos obrigatórios!"));
 
     User.findOne({
         where: {
@@ -19,7 +17,7 @@ exports.login = (req, res) => {
     }).then(user => {
         if (user == null) {
             console.log("Usuário não encontrado.");
-            return res.status(400).json(Message("Usuário ou senha incorretos."));
+            return res.status(422).json(Message("Usuário ou senha incorretos."));
         }
 
         bcrypt.compare(body.password, user.password).then(result => {
@@ -28,27 +26,17 @@ exports.login = (req, res) => {
                     name: user.login
                 }, process.env.SECRET);
 
-                User.update({
-                    token: token
-                }, {
-                    where: {
-                        id: user.id
-                    }
-                }).then(() => {
-                    console.log('Token alterado na tabela User.');
-                }).catch(err => {
-                    console.log(err);
-                });
-
                 return res.json({
                     token: token
                 });
+            } else {
+                return res.status(422).json(Message("Usuário ou senha incorretos."));
             }
         })
     }).catch(err => {
         console.log('Error ao logar', err);
     });
-}
+};
 
 exports.logout = (req, res) => {
     return res.json(Message("Usuário disconected"));
