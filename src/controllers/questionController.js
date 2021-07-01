@@ -23,8 +23,13 @@ exports.createQuestion = (req, res) => {
 
 exports.getAllQuestions = (req, res) => {
     Question.findAll({
-        attributes: ['id'],
-        limit: 10
+        limit: 10,
+        include: [
+            {
+                model: Alternative,
+                attributes: ['id', 'alternative']
+            }
+        ] 
     }).then(question => {
         return res.json(question);
     }).catch(err => {
