@@ -27,7 +27,8 @@ exports.login = (req, res) => {
                 }, process.env.SECRET);
 
                 return res.json({
-                    token: token
+                    token: token,
+                    id: user.id
                 });
             } else {
                 return res.status(422).json(Message("Usuário ou senha incorretos."));
