@@ -11,7 +11,6 @@ exports.create = (req, res) => {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
 
-    // validação para permitir criar apenas um user
     User.findAndCountAll({
         where: {
             user: body.user
@@ -22,14 +21,11 @@ exports.create = (req, res) => {
             return res.status(400).json(Message("Usuário já existe."));
         }
 
-        // fazendo o hash da senha
         bcrypt.hash(body.password, salt, (err, hash) => {
             if (err) {
                 console.log('Error: erro ao cifrar a senha.', err);
             } else {
-                console.log('hash', hash);
 
-                // criando o usuário
                 User.create({
                     name: body.name,
                     user: body.user,
@@ -37,7 +33,7 @@ exports.create = (req, res) => {
                 }).then(user => {
                     return res.json(Message("Cadastro realizado com sucesso."));
                 }).catch(err => {
-                    console.log("[Erro no insert]\n",err);
+                    console.log("[Erro no insert]\n", err);
                     return res.status(500).json(Message("Erro no servidor. Por favor, entre em contato com o suporte."));
                 });
             }
@@ -76,14 +72,10 @@ exports.update = (req, res) => {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
 
-    // fazendo o hash da senha
     bcrypt.hash(body.password, salt, (err, hash) => {
         if (err) {
             console.log('Error: erro ao cifrar a senha.', err);
         } else {
-            console.log('hash', hash);
-
-            // alterando o usuário
             User.update({
                 name: body.name,
                 user: body.user,

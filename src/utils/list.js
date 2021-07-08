@@ -20,8 +20,8 @@ class List {
         do {
             swaped = false;
             for (let i = 0; i < (this.elements.length - 1); i++) {
-                if (this.elements[i].points < this.elements[i+1].points) {
-                    this.swap(i, i+1);
+                if (this.elements[i].points < this.elements[i + 1].points) {
+                    this.swap(i, i + 1);
                     swaped = true;
                 }
             }
@@ -33,8 +33,8 @@ class List {
         do {
             swaped = false;
             for (let i = 0; i < (this.elements.length - 1); i++) {
-                if (this.elements[i].user.name > this.elements[i+1].user.name) {
-                    this.swap(i, i+1);
+                if (this.elements[i].user.name > this.elements[i + 1].user.name) {
+                    this.swap(i, i + 1);
                     swaped = true;
                 }
             }

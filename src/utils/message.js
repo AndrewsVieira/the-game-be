@@ -1,9 +1,9 @@
 
 const message = (message) => {
     let status = {
-        message : message
+        message: message
     }
-     
+
     return status;
 }
 

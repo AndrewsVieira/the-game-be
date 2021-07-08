@@ -4,8 +4,6 @@ const Message = require("../utils/message");
 exports.createAlternative = (req, res) => {
     let body = req.body;
 
-    console.log(body);
-
     if (body.alternative == null || body.id_question == null || body.is_right == null) {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }

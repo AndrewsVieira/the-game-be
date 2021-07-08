@@ -18,7 +18,7 @@ const User = connParams.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
-},{
+}, {
     freezeTableName: true,
     timestamps: false
 })
