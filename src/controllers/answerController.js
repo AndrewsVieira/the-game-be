@@ -22,7 +22,9 @@ exports.createAnswer = (req, res) => {
             }
         }).then(alternative => {
             const response = {
-                is_right: alternative.is_right
+                is_right: alternative.is_right,
+                id_alternative: body.id_alternative,
+                id_user: body.id_user
             }
 
             if(alternative == null){

@@ -11,7 +11,7 @@ const Question = connParams.define('question', {
         type: Sequelize.STRING,
         allowNull: false
     },
-},{
+}, {
     freezeTableName: true,
     timestamps: false
 })
