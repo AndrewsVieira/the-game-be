@@ -1,3 +1,5 @@
+USE the_game;
+
 INSERT INTO question (question) VALUES ('Pergunta 1');
 INSERT INTO question (question) VALUES ('Pergunta 2');
 INSERT INTO question (question) VALUES ('Pergunta 3');

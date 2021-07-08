@@ -6,19 +6,25 @@ const Ranking = require("../models/ranking");
 exports.createAnswer = (req, res) => {
     let body = req.body;
 
+    
     if (body.id_user == null || body.id_alternative == null) {
         return res.status(400).json(Message("Os Dados não podem ser nulos!"));
     }
-
+    
     Answer.create({
         id_alternative: body.id_alternative,
         id_user: body.id_user,
     }).then(answer => {
+        
         Alternative.findOne({
             where : {
                 id : answer.dataValues.id_alternative
             }
         }).then(alternative => {
+            const response = {
+                is_right: alternative.is_right
+            }
+
             if(alternative == null){
                 return res.status(400).json(Message("Alternativa não encontrada!!"));
             }
@@ -60,12 +66,12 @@ exports.createAnswer = (req, res) => {
                     console.log(err);
                 })
             }
+            return res.json(response);
         }).catch(err => {
             res.status(500).json(Message("Ocorreu um erro fazer a busca no banco de dados. Tende novamente mais tarde."));
             console.log(err);
         });
 
-        return res.json(answer);
     }).catch(err => {
         res.status(500).json(Message("Ocorreu um erro fazer a busca no banco de dados. Tende novamente mais tarde."));
         console.log(err);
