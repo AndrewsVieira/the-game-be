@@ -28,42 +28,32 @@ Assim sendo, clone esse projeto no repositório do git: git clone https://github
 
 <h3> Como rodar o projeto </h3>
 
-<p>É necessário que haja o a instalação do Node.Js, Cors, Dotenv, mysql2, JsonWebToken, Sequelize , Express,  Express-validator<br></br>
+<p>É necessário que haja a instalação do Node.Js, Cors, Dotenv, mysql2, JsonWebToken, Sequelize , Express,  Express-validator<br></br>
         Para isso, utilize dos seguintes comandos:</p>
 
-*(Instalação o gerenciador de pacotes do Node.JS-(NPM).
+*(Instalação do gerenciador de pacotes do Node.JS-(NPM).
 
 
 npm init -y
 
 
-npm install cors, dotenv, mysql2, jsonwebtoken, sequelize, express, express-validator
+npm install cors, dotenv, mysql2, jsonwebtoken, sequelize, express
 
-
-*(Instalação do React.JS)
-
-
-npm install -g create-react-app
-
-*(Criação da pasta do Front_end para utilização do React.JS)
-
-
-npx create-react-app form_frontend
 
 <h3>INSTRUÇÕES PARA EXECUTAR O BANCO DE DADOS</h3>
 
 *O arquivo db_schemas.sql deve estar onde o banco de dados está sendo executado, na máquina (localhost) ou dentro da instância da AWS-Amazon.
-
-
-*No arquivo (.env), alter o campo HOST para o ip da máquina utilizada (localhost ou DNS público AWS-Amazon)
-
-
-*Banco de dados utilizado para execução do presente projeto é utilizando o Banco de Dados MYSQL
-
-Vale lembrar que a tecnologia utilizada para portabilidade dos comandos SQL, é utilizando o Mapeamento Objeto-Relacional-(ORM) com Sequelize
 Considerando esse fato, execute o comando:
 
 sudo mysql < db_schema.sql
+
+*No arquivo (.env), altere o campo HOST para o ip da máquina utilizada (localhost ou DNS público AWS-Amazon)
+
+
+*O banco de dados utilizado para execução do presente projeto foi MySql Server
+
+Foi utilizado Mapeamento Objeto-Relacionam para a portabilidade dos comandos SQL, nesse caso o Sequeliza.
+
 
 <h3>INSTRUÇÕES PARA EXECUTAR O SERVIDOR</h3>
 
