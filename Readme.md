@@ -25,7 +25,6 @@ Assim sendo, clone esse projeto no repositório do git: git clone https://github
 - [Json Web Token]()
 - [Sequelize]()
 - [Express]()
-- [Express-Validator]()
 
 <h3> Como rodar o projeto </h3>
 
