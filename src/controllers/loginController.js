@@ -1,27 +1,43 @@
 const User = require("../models/user");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const Message = require("../utils/message");
 
-exports.login = (req, res) => {
-    let body = req.body;
+require('dotenv').config();
 
-    if (body.login == null || body.password == null) {
-        return res.status(400).json(Message("Os Dados não podem ser nulos!"));
-    }
+exports.login = (req, res) => {
+    const body = req.body;
+
+    if (body.login == null || body.password == null || body.login == "" || body.password == "") return res.status(422).json(Message("Login e senha são campos obrigatórios!"));
 
     User.findOne({
         where: {
-            user: body.login,
-            password: body.password
+            user: body.login
         }
     }).then(user => {
         if (user == null) {
-            return res.status(400).json(Message("Usuario não encontrado"));
+            console.log("Usuário não encontrado.");
+            return res.status(422).json(Message("Usuário ou senha incorretos."));
         }
-        return res.json(user);
+
+        bcrypt.compare(body.password, user.password).then(result => {
+            if (result) {
+                const token = jwt.sign({
+                    name: user.login
+                }, process.env.SECRET);
+
+                return res.json({
+                    token: token,
+                    id: user.id
+                });
+            } else {
+                return res.status(422).json(Message("Usuário ou senha incorretos."));
+            }
+        })
     }).catch(err => {
-        console.log('Error ao logar', err)
+        console.log('Error ao logar', err);
     });
-}
+};
 
 exports.logout = (req, res) => {
     return res.json(Message("Usuário disconected"));
